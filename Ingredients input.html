@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredients Input</title>
+</head>
+<body>
+    <h1>Ingredients Input</h1>
+
+    <label for="ingredients">Ingredients:</label>
+    <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" onkeypress="addIngredient(event)">
+
+    <button onclick="clearIngredients()">Clear</button>
+
+    <h2>My Ingredients</h2>
+    <ul id="ingredientList"></ul>
+
+    <script src="Ing_Function.js"></script> <!-- Include the script.js file here -->
+</body>
+</html>
