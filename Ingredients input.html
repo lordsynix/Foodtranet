@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Ingredients Input</title>
+</head>
+<body>
+    <h1>Ingredients Input</h1>
+
+    <label for="ingredients">Ingredients:</label>
+    <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" onkeypress="addIngredient(event)">
+
+    <h2>My Ingredients</h2>
+    <ul id="ingredientList"></ul>
+
+    <script>
+        function addIngredient(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); // Prevent form submission
+                const inputElement = document.getElementById('ingredients');
+                const ingredient = inputElement.value.trim();
+                if (ingredient !== '') {
+                    const ingredientList = document.getElementById('ingredientList');
+                    const listItem = document.createElement('li');
+                    listItem.textContent = ingredient;
+                    ingredientList.appendChild(listItem);
+                    inputElement.value = ''; // Clear the input field
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+
