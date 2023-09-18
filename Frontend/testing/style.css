@@ -1,0 +1,26 @@
+/* Style the list items as a grid with a fixed width of 5cm */
+ul#ingredientList {
+    list-style: none;
+    padding: 0;
+    width: 5cm; /* Set the fixed width */
+}
+
+li {
+    display: grid;
+    grid-template-columns: auto auto; /* Two columns: ingredient and button */
+    gap: 10px; /* Adjust the gap to set spacing between them */
+    align-items: center; /* Vertically center the content */
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px; /* Fixed padding for button spacing */
+    font-size: 14px; /* Fixed font size for an optically realistic size */
+    width: 60px; /* Fixed width for the button */
+    height: 30px; /* Fixed height for the button */
+    margin-left: 1cm; /* Fixed margin to maintain 2cm distance from ingredient */
+}
