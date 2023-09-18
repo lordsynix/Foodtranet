@@ -6,15 +6,51 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="foodtranet.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>    
     </head>
     <body> 
         <header>
             <h1>FoodTranet</h1>
         </header>
 
-            <h2>Time required</h2>
+            <h2>Time required</h2>        
 
+            <input type="text" id="rangeSlider" name="rangeSlider" />
 
+            <script>
+                $(document).ready(function () {
+                    const rangeSlider = $("#rangeSlider");
+
+                    // Initialize the ion-rangeslider
+                    rangeSlider.ionRangeSlider({
+                        type: "double",  // Use two handles for the range
+                        grid: true,      // Display grid lines
+                        min: 0,          // Minimum value
+                        max: 100,        // Maximum value
+                        from: 25,        // Initial left handle value
+                        to: 75           // Initial right handle value
+                    });
+
+                    // Get the ion-rangeslider instance
+                    const sliderInstance = rangeSlider.data("ionRangeSlider");
+
+                    // Initialize an array to store the top and bottom values
+                    const valuesArray = [25, 75];
+
+                    // Update the array when the range slider values change
+                    sliderInstance.update({
+                        onFinish: function (data) {
+                            valuesArray[0] = data.from;
+                            valuesArray[1] = data.to;
+
+                            // Display the array in the console (you can further use or save this array as needed)
+                            console.log("Range Values: ", valuesArray);
+                        }
+                    });
+                });
+            </script>
             <h2>Filter</h2>
             <ul>
                 <li>
