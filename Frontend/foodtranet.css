@@ -1,0 +1,54 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+}
+
+button {
+    background-color: #ee2323;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #05c015;
+}
+
+@media (max-width: 768px) {
+    #content {
+        padding: 10px;
+    }
+}
+
+ul#ingredientList {
+    list-style: none;
+    padding: 0;
+    width: 5cm; /* Set the fixed width */
+}
+
+li {
+    display: grid;
+    grid-template-columns: auto auto; /* Two columns: ingredient and button */
+    gap: 10px; /* Adjust the gap to set spacing between them */
+    align-items: center; /* Vertically center the content */
+    margin: 5px 0;
+}
+
+.delete-button {
+    background-color: #ff4c4c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px; /* Fixed padding for button spacing */
+    font-size: 14px; /* Fixed font size for an optically realistic size */
+    width: 60px; /* Fixed width for the button */
+    height: 30px; /* Fixed height for the button */
+    margin-left: 1cm; /* Fixed margin to maintain 2cm distance from ingredient */
+}

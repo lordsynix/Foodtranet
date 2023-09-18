@@ -9,20 +9,25 @@ function addIngredient(event) {
         if (ingredient !== '') {
             const ingredientList = document.getElementById('ingredientList');
             const listItem = document.createElement('li');
-            listItem.textContent = ingredient;
-            ingredientList.appendChild(listItem);
-            inputElement.value = ''; // Clear the input field
 
+            // Create a span for the ingredient text
+            const ingredientSpan = document.createElement('span');
+            ingredientSpan.textContent = ingredient;
+
+            // Create a button to delete the ingredient
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
             deleteButton.onclick = function() {
-                deleteIngredient(ingredient);
+                deleteIngredient(ingredient, listItem);
             };
-            
+            deleteButton.classList.add('delete-button'); // Apply the class
+
+            // Append the span and button to the list item
+            listItem.appendChild(ingredientSpan);
             listItem.appendChild(deleteButton);
+
             ingredientList.appendChild(listItem);
             inputElement.value = ''; // Clear the input field
-
 
             // Add the ingredient to the array
             ingredientsArray.push(ingredient);
@@ -32,6 +37,19 @@ function addIngredient(event) {
         }
     }
 }
+
+function deleteIngredient(ingredient, listItem) {
+    const ingredientList = document.getElementById('ingredientList');
+    const index = ingredientsArray.indexOf(ingredient);
+    if (index !== -1) {
+        ingredientsArray.splice(index, 1); // Remove the ingredient from the array
+        ingredientList.removeChild(listItem); // Remove the ingredient from the list
+
+        // Automatically save the updated array
+        saveIngredients();
+    }
+}
+
 
 function clearIngredients() {
     const ingredientList = document.getElementById('ingredientList');
@@ -52,17 +70,6 @@ function saveIngredients() {
 }
 
 
-function deleteIngredient(ingredient) {
-    const ingredientList = document.getElementById('ingredientList');
-    const index = ingredientsArray.indexOf(ingredient);
-    if (index !== -1) {
-        ingredientsArray.splice(index, 1); // Remove the ingredient from the array
-        ingredientList.removeChild(ingredientList.childNodes[index]); // Remove the ingredient from the list
-
-        // Automatically save the updated array
-        saveIngredients();
-    }
-}
 
 
 
