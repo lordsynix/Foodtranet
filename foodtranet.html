@@ -9,6 +9,36 @@
         <link rel="stylesheet" href="foodtranet.css">
     </head>
     <body> 
+        <header>
+            <h1>FoodTranet</h1>
+        </header>
+        <main>
+            <section id="time">
+                <h2>Time required</h2>
+            </section>
+            <section id="filter">
+                <h2>Filter</h2>
+                <ul>
+                    <li>
+                    <input type="checkbox" id="vegan" name="allergies" value="vegan">
+                    <label for="vegan">Vegan</label>
+                    </li>
+
+                    <li>
+                    <input type="checkbox" id="vegetarian" name="allergies" value="vegetarian">
+                    <label for="vegetarian">Vegetarian</label>
+                    </li>
+
+                    <li>
+                    <input type="checkbox" id="no allergies" name="allergies" value="no allergies">
+                    <label for="no allergies">No allergies</label>
+                    </li>
+                </ul>
+            </section>
+            <section id="ingredients">
+                <h2>Ingredients</h2>
+            </section>
+        </main>
         <script src="foodtranet.js" async defer></script>
     </body>
 </html>
