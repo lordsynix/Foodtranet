@@ -13,6 +13,17 @@ function addIngredient(event) {
             ingredientList.appendChild(listItem);
             inputElement.value = ''; // Clear the input field
 
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+                deleteIngredient(ingredient);
+            };
+            
+            listItem.appendChild(deleteButton);
+            ingredientList.appendChild(listItem);
+            inputElement.value = ''; // Clear the input field
+
+
             // Add the ingredient to the array
             ingredientsArray.push(ingredient);
 
@@ -39,6 +50,20 @@ function saveIngredients() {
     const ingredientsJSON = JSON.stringify(ingredientsArray);
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
+
+
+function deleteIngredient(ingredient) {
+    const ingredientList = document.getElementById('ingredientList');
+    const index = ingredientsArray.indexOf(ingredient);
+    if (index !== -1) {
+        ingredientsArray.splice(index, 1); // Remove the ingredient from the array
+        ingredientList.removeChild(ingredientList.childNodes[index]); // Remove the ingredient from the list
+
+        // Automatically save the updated array
+        saveIngredients();
+    }
+}
+
 
 
 
