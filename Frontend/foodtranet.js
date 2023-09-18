@@ -39,3 +39,36 @@ function saveIngredients() {
     const ingredientsJSON = JSON.stringify(ingredientsArray);
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
+
+
+
+// Eine Funktion erstellen, um den Wert einer Checkbox als Boolean zu speichern und anzuzeigen
+function aktualisiereCheckboxWert(checkboxElement) {
+    const wertAlsBoolean = checkboxElement.checked;
+    console.log(checkboxElement.id, wertAlsBoolean);
+    // Hier kannst du den Wert weiterverarbeiten oder speichern
+}
+
+// Die Checkbox-Elementreferenzen abrufen
+const vegan = document.getElementById('vegan');
+const vegetarian = document.getElementById('vegetarian');
+const noAllergies = document.getElementById('noAllergies');
+
+// Ein Event-Listener hinzufügen, der auf Änderungen des Checkbox-Status reagiert
+vegan.addEventListener('change', function() {
+    aktualisiereCheckboxWert(vegan); // Funktion mit checkbox1 aufrufen
+});
+
+vegetarian.addEventListener('change', function() {
+    aktualisiereCheckboxWert(vegetarian); // Funktion mit checkbox2 aufrufen
+});
+
+noAllergies.addEventListener('change', function() {
+    aktualisiereCheckboxWert(noAllergies); // Funktion mit checkbox2 aufrufen
+});
+
+
+// Die Funktion einmalig aufrufen, um die initialen Werte anzuzeigen
+aktualisiereCheckboxWert(vegan);
+aktualisiereCheckboxWert(vegetarian);
+aktualisiereCheckboxWert(noAllergies);
