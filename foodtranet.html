@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="de">
-<html>
     <head>
         <meta charset="utf-8">
         <title>FoodTranet</title>
@@ -36,9 +35,17 @@
                 </ul>
             </section>
             <section id="ingredients">
-                <h2>Ingredients</h2>
+                <h1>Ingredients Input</h1>
+
+                <label for="ingredients">Ingredients:</label>
+                <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" onkeypress="addIngredient(event)">
+
+                <button onclick="clearIngredients()">Clear</button>
+
+                <h2>My Ingredients</h2>
+                <ul id="ingredientList"></ul>
             </section>
         </main>
-        <script src="foodtranet.js" async defer></script>
+        <script src="foodtranet.js"></script> 
     </body>
 </html>
