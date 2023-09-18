@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load Ingredients from JSON File</title>
+</head>
+<body>
+
+    <h1>Filter Ingredients from JSON File</h1>
+    
+    <!-- Create a button to trigger loading the JSON file -->
+    <button id="loadButton">Filter Ingredients</button>
+    
+    <script>
+        const loadButton = document.getElementById('loadButton');
+
+        let ingredientsArray = [];
+
+        loadButton.addEventListener('click', () => {
+            fetch('http://localhost:3000/ingredients.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Data loaded");
+                    storeIngredients(data);
+                })
+                .catch(error => {
+                    console.log("Data error");
+                    ingredientsList.innerHTML = 'Error loading JSON file: ' + error.message;
+                });
+        });
+
+        function storeIngredients(data){
+            console.log(data.length);
+            ingredientsArray = [];
+
+            data.forEach(ingredient => {
+                let dublicate = false;
+                if (ingredientsArray.length > 0){
+                    ingredientsArray.forEach(_ingredient => {
+                        if (ingredient == _ingredient){
+                            dublicate = true;
+                        }
+                    })
+                    if (!dublicate){
+                        ingredientsArray.push(ingredient);
+                    }
+                } else{
+                    ingredientsArray.push(ingredient);
+                }
+            })
+
+            console.log(ingredientsArray.length);
+            saveIngredients();
+        }
+
+        function saveIngredients(){
+            // Überprüfen, ob ingredientsArray Daten enthält
+            if (ingredientsArray.length > 0) {
+                // Daten in JSON-Datei schreiben
+                const jsonContent = JSON.stringify(ingredientsArray, null, 2);
+                const blob = new Blob([jsonContent], { type: 'application/json' });
+                const blobURL = URL.createObjectURL(blob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobURL;
+                downloadLink.download = 'savedIngredients.json';
+                downloadLink.click();
+                URL.revokeObjectURL(blobURL);
+                console.log("Data saved");
+            } else {
+                console.log("No data to save.");
+            }
+        }
+        
+    </script>
+</body>
+</html>

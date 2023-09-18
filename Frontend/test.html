@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Load and Save Ingredients</title>
+</head>
+<body>
+
+    <h1>Load and Save Ingredients</h1>
+    
+    <!-- Create buttons to load and save the JSON file -->
+    <button id="loadButton">Load Ingredients</button>
+    <button id="saveButton">Save Ingredients</button>
+
+    <script>
+        const loadButton = document.getElementById('loadButton');
+        const saveButton = document.getElementById('saveButton');
+        let ingredientsArray = [];
+
+        loadButton.addEventListener('click', () => {
+            fetch('http://localhost:3000/ingredientsData.json')
+                .then(response => response.json())
+                .then(data => {
+                    console.log("Data loaded");
+                    ingredientsArray = [];
+                    data.forEach(recipe => {
+                        recipe.ingredients.forEach(ingredient => {
+                            ingredientsArray.push(ingredient);
+                        });
+                    });
+                    console.log(ingredientsArray);
+                })
+                .catch(error => {
+                    console.log("Data error");
+                    ingredientsArray = [];
+                });
+        });
+
+        saveButton.addEventListener('click', () => {
+            // Überprüfen, ob ingredientsArray Daten enthält
+            if (ingredientsArray.length > 0) {
+                // Daten in JSON-Datei schreiben
+                const jsonContent = JSON.stringify(ingredientsArray, null, 2);
+                const blob = new Blob([jsonContent], { type: 'application/json' });
+                const blobURL = URL.createObjectURL(blob);
+                const downloadLink = document.createElement('a');
+                downloadLink.href = blobURL;
+                downloadLink.download = 'savedIngredients.json';
+                downloadLink.click();
+                URL.revokeObjectURL(blobURL);
+                console.log("Data saved");
+            } else {
+                console.log("No data to save.");
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
