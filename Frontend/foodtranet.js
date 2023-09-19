@@ -2,17 +2,6 @@
 const ingredientsArray = []; // Initialize an array to store ingredients
 
 
-
-const ingredientTitle = document.getElementById('ingredientTitle');
-function showIngredientTitle() {
-    if (ingredientsArray.lenght > 0) {
-        ingredientTitle.style.display = 'block' ;
-    } else {
-        ingredientTitle.style.display = 'none' ;
-    }
-}
-showIngredientTitle();
-
 function addIngredient(event) {
     if (event.key === 'Enter') {
         event.preventDefault(); // Prevent form submission
