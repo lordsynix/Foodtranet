@@ -5,7 +5,7 @@
         <title>FoodTranet</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="foodtranet.css">
+        <link rel="stylesheet" href="../foodtranet.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>    
@@ -73,9 +73,9 @@
             <h2>Ingredients Input</h2>
 
             <label for="ingredients">Ingredients:</label>
-            <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" list="ingredientList" oninput="autocomplete()" onkeypress="addIngredient(event)">
+            <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" list="ingredientList" onkeypress="addIngredient(event)">
         
-            <datalist id="ingredientList">
+            <datalist id="ingredientDataList">
                 <option value="baking powder">
                     <option value="eggs">
                     <option value="all-purpose flour">
@@ -4567,6 +4567,6 @@
             <h2>My Ingredients</h2>
             <ol id="ingredientList" class="ingredientList"></ol> 
         
-            <script src="foodtranet.js"></script> 
+            <script src="Ing_FunctionMatia.js"></script> 
     </body>
 </html>

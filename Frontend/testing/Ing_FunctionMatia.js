@@ -24,6 +24,9 @@ function addIngredient(event) {
             };
             deleteButton.classList.add('delete-button'); // Apply the class
 
+            // Add the ingredient to the array
+            ingredientsArray.push(ingredient);
+
             // Append the span and button to the list item
             listItem.appendChild(ingredientSpan);
             listItem.appendChild(deleteButton);
@@ -31,8 +34,6 @@ function addIngredient(event) {
             ingredientList.appendChild(listItem);
             inputElement.value = ''; // Clear the input field
 
-            // Add the ingredient to the array
-            ingredientsArray.push(ingredient);
 
             // Automatically save the updated array
             saveIngredients();
@@ -75,7 +76,7 @@ function saveIngredients() {
 
 // Get the input field and the datalist
 const ingredientsInput = document.getElementById('ingredients');
-const ingredientList = document.getElementById('ingredientList');
+const ingredientList = document.getElementById('ingredientDataList');
 
 // Handle the input event
 function autocomplete() {
