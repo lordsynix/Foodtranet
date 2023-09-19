@@ -15,6 +15,7 @@
             <h1>FoodTranet</h1>
         </header>
 
+            <div class="time">
             <h2>Time required</h2>        
 
             <input type="text" id="rangeSlider" name="rangeSlider" />
@@ -51,6 +52,8 @@
                     });
                 });
             </script>
+            </div>
+
             <h2>Filter</h2>
             <ul class="filter">
                 <li>
@@ -77,7 +80,7 @@
 
             <button onclick="clearIngredients()">Clear</button>
 
-            <h2>My Ingredients</h2>
+            <h2 id="ingredientTitle">My Ingredients</h2>
             <ol id="ingredientList" class="ingredientList"></ol> 
         
             <script src="foodtranet.js"></script> 

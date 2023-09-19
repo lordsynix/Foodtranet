@@ -9,7 +9,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #ffffff;
     margin: 0;
-    padding: 0;
+    padding: 50px;
 }
 
 h1 {
@@ -26,6 +26,12 @@ button {
     padding: 10px 20px;
     border: none;
     cursor: pointer;
+}
+
+.time {
+    text-align: center;
+    padding: 50px;
+    margin: auto;
 }
 
 button:hover {
