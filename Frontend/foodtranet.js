@@ -1,6 +1,18 @@
 // script.js
 const ingredientsArray = []; // Initialize an array to store ingredients
 
+
+
+const ingredientTitle = document.getElementById('ingredientTitle');
+function showIngredientTitle() {
+    if (ingredientsArray.lenght > 0) {
+        ingredientTitle.style.display = 'block' ;
+    } else {
+        ingredientTitle.style.display = 'none' ;
+    }
+}
+showIngredientTitle();
+
 function addIngredient(event) {
     if (event.key === 'Enter') {
         event.preventDefault(); // Prevent form submission
@@ -35,6 +47,12 @@ function addIngredient(event) {
 
             // Automatically save the updated array
             saveIngredients();
+            
+            if (ingredientsArray.lenght > 0) {
+                ingredientTitle.style.display = 'block' ;
+            } else {
+                ingredientTitle.style.display = 'none' ;
+            }
         }
     }
 }
@@ -69,10 +87,6 @@ function saveIngredients() {
     const ingredientsJSON = JSON.stringify(ingredientsArray);
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
-
-
-
-
 
 
 // Eine Funktion erstellen, um den Wert einer Checkbox als Boolean zu speichern und anzuzeigen
