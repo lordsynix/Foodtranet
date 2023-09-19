@@ -1,28 +1,26 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
+const { initializeRecipes } = require('./recipes.js');
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(bodyParser.json());
 
 app.use(cors());
 
-app.use(express.static(__dirname)); // Statische Dateien im aktuellen Verzeichnis servieren
+initializeRecipes();
 
-const port = process.env.PORT || 3000;
+app.post('/api/searchRecipes', (req, res) => {
+  const { ingredients } = req.body;
+
+  console.log('Api called');
+  console.log(ingredients);
+  res.json({ ingredients });
+  console.log('--------------------------------');
+});
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
-
-/*initializeServer();
-
-function initializeServer() {
-  // initialize Server
-  console.log('Server is being initialized...');
-
-  initializeRecipes()
-
-  // start the server
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-}*/
