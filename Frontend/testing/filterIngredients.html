@@ -1,69 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Load Ingredients from JSON File</title>
 </head>
+
 <body>
 
     <h1>Filter Ingredients from JSON File</h1>
-    
+
     <!-- Create a button to trigger loading the JSON file -->
     <button id="loadButton">Filter Ingredients</button>
-    
+
     <script>
         const loadButton = document.getElementById('loadButton');
 
+        let recipesArray = [];
         let ingredientsArray = [];
 
         loadButton.addEventListener('click', () => {
+
             fetch('http://localhost:3000/ingredients.json')
                 .then(response => response.json())
-                .then(data => {
-                    console.log("Data loaded");
-                    storeIngredients(data);
+                .then(ingredients => {
+                    console.log("Ingredients loaded");
+                    storeIngredients(ingredients);
+                })
+
+            fetch('http://localhost:3000/recipes_raw.json')
+                .then(response => response.json())
+                .then(recipes => {
+                    console.log("recipes loaded");
+                    // Verwenden Sie Object.values(), um nur die Werte aus dem Dictionary zu erhalten
+                    const valuesArray = Object.values(recipes);
+                    storeRecipes(valuesArray);
                 })
                 .catch(error => {
                     console.log("Data error");
-                    ingredientsList.innerHTML = 'Error loading JSON file: ' + error.message;
                 });
+
         });
 
-        function storeIngredients(data){
-            console.log(data.length);
+        function storeIngredients(ingredients) {
             ingredientsArray = [];
 
-            data.forEach(ingredient => {
-                let dublicate = false;
-                if (ingredientsArray.length > 0){
-                    ingredientsArray.forEach(_ingredient => {
-                        if (ingredient == _ingredient){
-                            dublicate = true;
-                        }
-                    })
-                    if (!dublicate){
-                        ingredientsArray.push(ingredient);
-                    }
-                } else{
-                    ingredientsArray.push(ingredient);
-                }
-            })
+            ingredients.forEach(ingredient => {
+                ingredientsArray.push(ingredient);
+            });
 
-            console.log(ingredientsArray.length);
-            saveIngredients();
+            console.log("Ingredients stored");
         }
 
-        function saveIngredients(){
-            // Überprüfen, ob ingredientsArray Daten enthält
-            if (ingredientsArray.length > 0) {
-                // Daten in JSON-Datei schreiben
-                const jsonContent = JSON.stringify(ingredientsArray, null, 2);
+        function storeRecipes(recipes) {
+            recipesArray = [];
+
+            recipes.forEach(recipe => {
+                recipesArray.push(recipe);
+            });
+            console.log("Recipes stored");
+            removePicture();
+        }
+
+        function removePicture() {
+            recipesArray.forEach(recipe => {
+                // Überprüfen, ob das Rezept ein 'picture_link' hat
+                if (recipe.hasOwnProperty('picture_link')) {
+                    delete recipe.picture_link;
+                }
+            });
+            console.log("Pictures removed");
+            duplicateIngredients();
+        }
+
+        function duplicateIngredients() {
+            const length = recipesArray.length;
+            console.log(length);
+            recipesArray.forEach((recipe, index) => {
+                console.log((index / length) * 100, '%');
+                if (recipe.hasOwnProperty('ingredients')) {
+                    recipe.search_ingredients = [];
+                    recipe.ingredients.forEach(ingredient => {
+                        recipe.search_ingredients.push(updateSearchIngredients(ingredient));
+                    });
+                }
+            });
+            console.log("Ingrediants duplicated");
+            saveIngredients(recipesArray); 
+        }
+
+        function updateSearchIngredients(ingredient) {
+            let matchs = [];
+
+            ingredientsArray.forEach(search_ingredient => {
+                if (ingredient.toLowerCase().includes(search_ingredient)){
+                    const value = search_ingredient.split(/\s+/).length;
+                    const match = {ingredient: search_ingredient, value: value};
+                    matchs.push(match);
+                }
+            });
+            
+            let topMatch = {ingredient: "", value: 0};
+            matchs.forEach(match => {
+                if (match.value > topMatch.value){
+                    topMatch = match;
+                }
+            });
+
+            return topMatch.ingredient;
+        }
+
+        function saveIngredients(recipesArray) {
+            // Überprüfen, ob recipesArray Daten enthält
+            if (recipesArray.length > 0) {
+                // Daten in JSON-Datei schreibens
+                const jsonContent = JSON.stringify(recipesArray, null, 2);
                 const blob = new Blob([jsonContent], { type: 'application/json' });
                 const blobURL = URL.createObjectURL(blob);
                 const downloadLink = document.createElement('a');
                 downloadLink.href = blobURL;
-                downloadLink.download = 'savedIngredients.json';
+                downloadLink.download = 'savedRecipes.json';
                 downloadLink.click();
                 URL.revokeObjectURL(blobURL);
                 console.log("Data saved");
@@ -71,7 +128,8 @@
                 console.log("No data to save.");
             }
         }
-        
+
     </script>
 </body>
+
 </html>
