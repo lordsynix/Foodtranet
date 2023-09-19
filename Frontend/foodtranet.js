@@ -9,6 +9,7 @@ function addIngredient(event) {
         if (ingredient !== '') {
             const ingredientList = document.getElementById('ingredientList');
             const listItem = document.createElement('li');
+            listItem.classList.add('ingredientList')
 
             // Create a span for the ingredient text
             const ingredientSpan = document.createElement('span');

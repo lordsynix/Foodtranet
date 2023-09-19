@@ -1,25 +1,3 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-    padding: 0;
-}
-
-h1 {
-    color: #333;
-}
-
-button {
-    background-color: #ee2323;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #05c015;
-}
 
 @media (max-width: 768px) {
     #content {
@@ -27,13 +5,40 @@ button:hover {
     }
 }
 
-ul#ingredientList {
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    background-color: #f0f0f0;
+    text-align: center;
+    padding: 50px;
+    margin: auto;
+}
+
+button {
+    background-color: #ff0000;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #812020;
+}
+
+ol#ingredientList {
     list-style: none;
     padding: 0;
     width: 5cm; /* Set the fixed width */
 }
 
-li {
+li.ingredientList {
     display: grid;
     grid-template-columns: auto auto; /* Two columns: ingredient and button */
     gap: 10px; /* Adjust the gap to set spacing between them */
@@ -42,8 +47,6 @@ li {
 }
 
 .delete-button {
-    background-color: #ff4c4c;
-    color: white;
     border: none;
     cursor: pointer;
     padding: 5px 10px; /* Fixed padding for button spacing */
@@ -52,3 +55,4 @@ li {
     height: 30px; /* Fixed height for the button */
     margin-left: 1cm; /* Fixed margin to maintain 2cm distance from ingredient */
 }
+
