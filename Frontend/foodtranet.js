@@ -1,4 +1,3 @@
-// script.js
 const ingredientsArray = []; // Initialize an array to store ingredients
 
 
@@ -92,15 +91,15 @@ const noAllergies = document.getElementById('noAllergies');
 
 // Ein Event-Listener hinzufügen, der auf Änderungen des Checkbox-Status reagiert
 vegan.addEventListener('change', function() {
-    aktualisiereCheckboxWert(vegan); // Funktion mit checkbox1 aufrufen
+    aktualisiereCheckboxWert(vegan); 
 });
 
 vegetarian.addEventListener('change', function() {
-    aktualisiereCheckboxWert(vegetarian); // Funktion mit checkbox2 aufrufen
+    aktualisiereCheckboxWert(vegetarian); 
 });
 
 noAllergies.addEventListener('change', function() {
-    aktualisiereCheckboxWert(noAllergies); // Funktion mit checkbox2 aufrufen
+    aktualisiereCheckboxWert(noAllergies); 
 });
 
 

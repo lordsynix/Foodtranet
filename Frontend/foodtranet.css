@@ -1,8 +1,5 @@
-
-@media (max-width: 768px) {
-    #content {
-        padding: 10px;
-    }
+* {
+    box-sizing: border-box;
 }
 
 body {
@@ -28,15 +25,29 @@ button {
     cursor: pointer;
 }
 
+button.clearButton {
+    margin-top: 10px;
+}
+
 .time {
     text-align: center;
     padding: 50px;
     margin: auto;
 }
 
+.input {
+    float: left;
+    width: 30%;
+}
+
+.myIngredients {
+    float: left;
+    width: 70%;
+}
+
 button:hover {
     color: #000000;
-    background-color: #e24848;
+    background-color: #ffaeae;
 }
 
 ol#ingredientList {
@@ -71,4 +82,12 @@ button#searchRecipies {
 button#searchRecipies:hover {
     color: #000000;
     background-color: #f0f0f0;    
+}
+
+@media (max-width: 740px) {
+    .input, .myIngredients {
+        width: 100%;
+        height: auto;
+        padding: 10px;
+    }
 }
