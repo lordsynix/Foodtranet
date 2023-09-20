@@ -35,7 +35,8 @@ button {
 }
 
 button:hover {
-    background-color: #812020;
+    color: #000000;
+    background-color: #e24848;
 }
 
 ol#ingredientList {
@@ -62,3 +63,12 @@ li.ingredientList {
     margin-left: 1cm; /* Fixed margin to maintain 2cm distance from ingredient */
 }
 
+button#searchRecipies {
+    color: #ffffff;
+    background-color: #333;
+}
+
+button#searchRecipies:hover {
+    color: #000000;
+    background-color: #f0f0f0;    
+}
