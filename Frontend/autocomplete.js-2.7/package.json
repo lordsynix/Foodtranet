@@ -1,0 +1,39 @@
+{
+  "name": "autocomplete-js",
+  "version": "2.7.1",
+  "author": "support@autocomplete-js.com",
+  "license": "MIT",
+  "description": "autocomplete.js is a fast and lightweight autocomplete library, without any dependencies.",
+  "main": "./dist/autocomplete.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/autocompletejs/autocomplete.js.git"
+  },
+  "homepage": "http://autocomplete-js.com",
+  "keywords": [
+    "autocomplete"
+  ],
+  "bugs": {
+    "url": "https://github.com/autocompletejs/autocomplete.js/issues"
+  },
+  "devDependencies": {
+    "browserify": "16.2.*",
+    "browserify-header": "^0.9.2",
+    "clean-css-cli": "^4.0.8",
+    "jshint": "^2.9.4",
+    "less": "3.0.*",
+    "minifyify": "^7.3.5",
+    "tsify": "4.0.*",
+    "typescript": "^2.2.1"
+  },
+  "scripts": {
+    "css-dev": "lessc src/autocomplete.less dist/autocomplete.css",
+    "css-prod": "lessc src/autocomplete.less dist/autocomplete.min.css && cleancss -o dist/autocomplete.min.css dist/autocomplete.min.css",
+    "js-dev": "browserify src/autocomplete.ts --standalone=AutoComplete -p [ tsify ] > dist/autocomplete.js",
+    "js-prod": "browserify src/autocomplete.ts --standalone=AutoComplete -p [ tsify ] -p [ minifyify --no-map ] -p browserify-header > dist/autocomplete.min.js",
+    "build-dev": "mkdir -p dist && npm run css-dev && npm run js-dev",
+    "build-prod": "mkdir -p dist && npm run css-prod && npm run js-prod",
+    "build": "rm -rf dist && npm run build-dev && npm run build-prod",
+    "test": "tsc --outFile test.js src/autocomplete.ts && jshint test.js"
+  }
+}

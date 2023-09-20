@@ -19,7 +19,7 @@ function addIngredient(event) {
             // Create a button to delete the ingredient
             const deleteButton = document.createElement('button');
             deleteButton.textContent = 'Delete';
-            deleteButton.onclick = function() {
+            deleteButton.onclick = function () {
                 deleteIngredient(ingredient, listItem);
             };
             deleteButton.classList.add('delete-button'); // Apply the class
@@ -71,36 +71,30 @@ function saveIngredients() {
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
 
+// Laden der JSON-Datei
+fetch('http://localhost:3000/ingredients.json')
+    .then(response => response.json())
+    .then(data => {
+        // Hier haben Sie Zugriff auf die Liste der möglichen Zutaten in der 'data'-Variablen
+        const possibleIngredients = data;
 
-// script.js
+        const inputElement = document.getElementById('ingredients');
 
-// Get the input field and the datalist
-const ingredientsInput = document.getElementById('ingredients');
-const ingredientList = document.getElementById('ingredientDataList');
+        autocomplete({
+            input: inputElement,
+            minLength: 1, // Mindestanzahl von Zeichen, um Vorschläge anzuzeigen
+            fetch: function (text, update) {
+                text = text.toLowerCase();
+                // Filtern Sie Zutaten, die den eingegebenen Text enthalten
+                const suggestions = possibleIngredients.filter(ingredient => ingredient.toLowerCase().includes(text));
+                update(suggestions);
+            },
+            onSelect: function (item) {
+                // Wird aufgerufen, wenn der Benutzer einen Vorschlag auswählt
+                inputElement.value = item;
+            }
+        });
+    })
+    .catch(error => console.error('Fehler beim Laden der JSON-Datei:', error));
 
-// Handle the input event
-function autocomplete() {
-    const inputValue = ingredientsInput.value.toLowerCase();
 
-    // Clear the previous autocomplete options
-    ingredientList.innerHTML = '';
-
-    // Filter and add matching options from the list
-    for (const option of ingredientList.options) {
-        const optionValue = option.value.toLowerCase();
-        if (optionValue.includes(inputValue)) {
-            const newOption = document.createElement('option');
-            newOption.value = option.value;
-            ingredientList.appendChild(newOption);
-        }
-    }
-}
-
-// Handle selecting an autocomplete option
-ingredientsInput.addEventListener('change', function() {
-    const selectedIngredient = ingredientsInput.value;
-    if (selectedIngredient) {
-        // You can do something with the selected ingredient here
-        console.log('Selected ingredient: ' + selectedIngredient);
-    }
-});
