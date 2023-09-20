@@ -50,7 +50,7 @@
                 ingredientsArray.push(ingredient);
             });
 
-            console.log("Ingredients stored");
+            console.log(ingredientsArray.length, "ingredients stored");
         }
 
         function storeRecipes(recipes) {
@@ -59,7 +59,7 @@
             recipes.forEach(recipe => {
                 recipesArray.push(recipe);
             });
-            console.log("Recipes stored");
+            console.log(recipesArray.length, "recipes stored");
             removePicture();
         }
 
@@ -91,10 +91,10 @@
         }
 
         function updateSearchIngredients(ingredient) {
-            let matchs = [];
+            let matches = [];
 
             ingredientsArray.forEach((searchIngredient) => {
-                const regex = new RegExp(`\\b${searchIngredient}\\b`, 'i');
+                const regex = new RegExp(`\\b${searchIngredient.toLowerCase()}\\b`, 'i');
                 if (regex.test(ingredient.toLowerCase())) {
                     const value = searchIngredient.split(/\s+/).length;
                     const match = { ingredient: searchIngredient, value };
@@ -103,7 +103,7 @@
             });
 
             let topMatch = { ingredient: "", value: 0 };
-            matchs.forEach(match => {
+            matches.forEach(match => {
                 if (match.value > topMatch.value) {
                     topMatch = match;
                 }
