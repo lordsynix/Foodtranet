@@ -20,4 +20,13 @@ function initializeRecipes() {
   });
 }
 
-module.exports = { initializeRecipes };
+function searchRecipes(ingredients){
+  console.log(ingredients);
+
+  const recipe = recipes[0];
+  console.log(recipe.title);
+  return recipe;
+}
+
+module.exports = { initializeRecipes,
+                   searchRecipes };

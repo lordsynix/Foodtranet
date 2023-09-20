@@ -22,14 +22,14 @@
 
         loadButton.addEventListener('click', () => {
 
-            fetch('http://localhost:3000/ingredients.json')
+            fetch('http://localhost:3000/api/getIngredients')
                 .then(response => response.json())
                 .then(ingredients => {
                     console.log("Ingredients loaded");
                     storeIngredients(ingredients);
                 })
 
-            fetch('http://localhost:3000/recipes_raw.json')
+            fetch('http://localhost:3000/api/getRecipes')
                 .then(response => response.json())
                 .then(recipes => {
                     console.log("recipes loaded");
@@ -87,23 +87,24 @@
                 }
             });
             console.log("Ingrediants duplicated");
-            saveIngredients(recipesArray); 
+            saveIngredients(recipesArray);
         }
 
         function updateSearchIngredients(ingredient) {
             let matchs = [];
 
-            ingredientsArray.forEach(search_ingredient => {
-                if (ingredient.toLowerCase().includes(search_ingredient)){
-                    const value = search_ingredient.split(/\s+/).length;
-                    const match = {ingredient: search_ingredient, value: value};
-                    matchs.push(match);
+            ingredientsArray.forEach((searchIngredient) => {
+                const regex = new RegExp(`\\b${searchIngredient}\\b`, 'i');
+                if (regex.test(ingredient.toLowerCase())) {
+                    const value = searchIngredient.split(/\s+/).length;
+                    const match = { ingredient: searchIngredient, value };
+                    matches.push(match);
                 }
             });
-            
-            let topMatch = {ingredient: "", value: 0};
+
+            let topMatch = { ingredient: "", value: 0 };
             matchs.forEach(match => {
-                if (match.value > topMatch.value){
+                if (match.value > topMatch.value) {
                     topMatch = match;
                 }
             });
