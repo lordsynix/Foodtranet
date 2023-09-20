@@ -71,30 +71,48 @@ function saveIngredients() {
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
 
-// Laden der JSON-Datei
-fetch('http://localhost:3000/ingredients.json')
+fetch('autocomplete.json')
     .then(response => response.json())
     .then(data => {
-        // Hier haben Sie Zugriff auf die Liste der möglichen Zutaten in der 'data'-Variablen
-        const possibleIngredients = data;
+        const inputField = document.getElementById('ingredients');
+        const list = document.getElementById('autocomplete-list');
+        
+        inputField.addEventListener('input', function() {
+            const inputValue = this.value.toLowerCase();
+            list.innerHTML = '';
 
-        const inputElement = document.getElementById('ingredients');
+            if (inputValue.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
 
-        autocomplete({
-            input: inputElement,
-            minLength: 1, // Mindestanzahl von Zeichen, um Vorschläge anzuzeigen
-            fetch: function (text, update) {
-                text = text.toLowerCase();
-                // Filtern Sie Zutaten, die den eingegebenen Text enthalten
-                const suggestions = possibleIngredients.filter(ingredient => ingredient.toLowerCase().includes(text));
-                update(suggestions);
-            },
-            onSelect: function (item) {
-                // Wird aufgerufen, wenn der Benutzer einen Vorschlag auswählt
-                inputElement.value = item;
+            const filteredData = data.filter(item => item.toLowerCase().includes(inputValue));
+            
+            if (filteredData.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.textContent = item;
+                listItem.addEventListener('click', function() {
+                    inputField.value = item;
+                    list.style.display = 'none';
+                });
+                list.appendChild(listItem);
+            });
+
+            list.style.display = 'block';
+        });
+
+        // Hide the autocomplete list when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target !== inputField && event.target !== list) {
+                list.style.display = 'none';
             }
         });
     })
-    .catch(error => console.error('Fehler beim Laden der JSON-Datei:', error));
-
-
+    .catch(error => {
+        console.error('Error loading JSON data:', error);
+    });

@@ -14,6 +14,7 @@
 
     <link rel="stylesheet" href="../autocomplete.js-2.7/dist/autocomplete.min.css">
     <script src="../autocomplete.js-2.7/dist/autocomplete.min.js"></script>
+    <link rel="stylesheet" href="autocomplete.css">
     <script>
         const inputElement = document.getElementById('ingredients');
     
@@ -95,11 +96,12 @@
     <h2>Ingredients Input</h2>
 
     <label for="ingredients">Ingredients:</label>
-    <input type="text" id="ingredients" placeholder="Zutaten eingeben..." onkeypress="addIngredient(event)">
-
-
+    
+        <input type="text" id="ingredients" placeholder="Zutaten eingeben..." onkeypress="addIngredient(event)">
+        <ul id="autocomplete-list"></ul>
+    
     <button onclick="clearIngredients()">Clear</button>
-
+    
     <h2>My Ingredients</h2>
     <ol id="ingredientList" class="ingredientList"></ol>
 
