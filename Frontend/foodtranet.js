@@ -37,11 +37,7 @@ function addIngredient(event) {
             // Automatically save the updated array
             saveIngredients();
             
-            if (ingredientsArray.lenght > 0) {
-                ingredientTitle.style.display = 'block' ;
-            } else {
-                ingredientTitle.style.display = 'none' ;
-            }
+            
         }
     }
 }
@@ -83,6 +79,10 @@ function aktualisiereCheckboxWert(checkboxElement) {
     const wertAlsBoolean = checkboxElement.checked;
     console.log(checkboxElement.id, wertAlsBoolean);
     // Hier kannst du den Wert weiterverarbeiten oder speichern
+}
+
+function searchRecipies() {
+    window.location.href = 'searchRecipies.html'
 }
 
 // Die Checkbox-Elementreferenzen abrufen
