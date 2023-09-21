@@ -133,8 +133,8 @@ fetch('https://foodtranet-test.onrender.com/api/getIngredients')
                 listItem.textContent = item;
                 
                 listItem.addEventListener('click', function() {
-                    addIngredientToTable(filteredData[0]);
-                    addIngredientToArray(filteredData[0]);
+                    addIngredientToTable(item);
+                    addIngredientToArray(item);
                     const inputElement = document.getElementById('ingredientInput');
                     inputElement.value = '';
                 });
