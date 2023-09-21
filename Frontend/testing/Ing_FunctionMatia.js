@@ -115,7 +115,8 @@ fetch('autocomplete.json')
                         const deleteButton = document.createElement('button');
                         deleteButton.textContent = 'Delete';
                         deleteButton.onclick = function () {
-                            deleteIngredient(ingredient, AutolistItem);
+                            listItem.removeChild(AutolistItem);
+                            listItem.removeChild(deleteButton)
                         };
                         deleteButton.classList.add('delete-button'); // Apply the class
 
