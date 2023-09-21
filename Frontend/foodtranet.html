@@ -59,9 +59,8 @@
             <h2>Ingredients Input</h2>
 
             <label for="ingredients">Ingredients:</label>
-            <input type="text" id="ingredients" name="ingredients" placeholder="Enter ingredients here" onkeypress="addIngredient(event)">
-
-            
+            <input type="text" id="ingredients" placeholder="Zutaten eingeben..." onkeypress="addIngredient(event)">
+            <ul id="autocomplete-list"></ul>
         </div>
 
         <button class="clearButton" onclick="clearIngredients()">Clear</button>
@@ -83,7 +82,7 @@
                 </li>   
             </ul>
         </div>
-        <button onclick="searchRecipies()" id="searchRecipies">Search Recipies</button>
+        <button onclick="searchRecipes()" id="searchRecipes">Search Recipes</button>
         </div>
 
         <div class="myIngredients">
