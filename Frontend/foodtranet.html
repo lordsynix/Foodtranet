@@ -59,7 +59,7 @@
             <h2>Ingredients Input</h2>
 
             <label for="ingredients">Ingredients:</label>
-            <input type="text" id="ingredients" placeholder="Zutaten eingeben..." onkeypress="addIngredient(event)">
+            <input type="text" id="ingredientInput" placeholder="Enter ingredients..." onkeypress="storeInput(event)">
             <ul id="autocomplete-list"></ul>
         </div>
 
@@ -78,16 +78,18 @@
                 </li>
 
                 <li>
-                <label for="no allergies"><input type="checkbox" id="noAllergies">No allergies</label>
+                <label for="noAllergies"><input type="checkbox" id="noAllergies">No allergies</label>
                 </li>   
             </ul>
         </div>
+
         <button onclick="searchRecipes()" id="searchRecipes">Search Recipes</button>
         </div>
 
         <div class="myIngredients">
             <h2>My Ingredients:</h2>
-            <ol id="ingredientList" class="ingredientList"></ol> 
+            <table id="ingredientTable">
+            </table>
         </div>
     
         <script src="foodtranet.js"></script> 
