@@ -108,7 +108,7 @@ function clearIngredients() {
     updateArray();
 }
 
-fetch('http://localhost:3000/api/getIngredients')
+fetch('https://foodtranet-test.onrender.com/api/getIngredients')
     .then(response => response.json())
     .then(data => {
         const inputField = document.getElementById('ingredientInput');
