@@ -17,7 +17,7 @@
     <script>
         const sendButton = document.getElementById('sendButton');
         sendButton.addEventListener('click', () => {
-            const ingredients = ['Zutat1', 'Zutat2', 'Zutat3']; // Beispielzutaten
+            const ingredients = ['chicken', 'bacon', 'eggs']; // Beispielzutaten
 
             fetch('http://localhost:3000/api/searchRecipes', {
                 method: 'POST',
