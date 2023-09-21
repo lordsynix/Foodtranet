@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Ingredients</title>
+</head>
+
+<body>
+
+    <h1>Add Ingredients</h1>
+
+    <!-- Create buttons to load and save the JSON file -->
+    <button id="sendButton">Send Ingredients</button>
+
+    <script>
+        const sendButton = document.getElementById('sendButton');
+        sendButton.addEventListener('click', () => {
+            fetch('http://localhost:3000/api/getIngredients')
+                .then(response => response.json())
+                .then(ingredients => {
+                    console.log("Ingredients loaded");
+                    storeIngredients(ingredients);
+                })
+
+            function storeIngredients(ingredients) {
+                allIngredients = [];
+
+                ingredients.forEach(ingredient => {
+                    allIngredients.push(ingredient.toLowerCase());
+                });
+
+                console.log(allIngredients.length, "current ingredients");
+                getBaseIngredients(allIngredients);
+            }
+
+            function getBaseIngredients(allIngredients) {
+                baseIngredients = [];
+
+                allIngredients.forEach(ingredient => {
+                    if (ingredient.split(/\s+/).length == 1) {
+                        baseIngredients.push(ingredient);
+                    }
+                });
+
+                console.log(baseIngredients.length, "base ingredients");
+                getAdvancedIngredients(allIngredients, baseIngredients);
+            }
+
+            function getAdvancedIngredients(allIngredients, baseIngredients) {
+                advancedIngredients = [];
+
+
+                allIngredients.forEach(ingredient => {
+                    let isAdvanced = false;
+                    baseIngredients.forEach(base => {
+                        if (ingredient.includes(base)) {
+                            if (ingredient.split(/\s+/).length > 1){
+                                isAdvanced = true;
+                            }
+                        }
+                    });
+                    if (isAdvanced) advancedIngredients.push(ingredient);
+                });
+
+                console.log(advancedIngredients.length, "advanced ingredients");
+                getRemainingIngredients(allIngredients, baseIngredients, advancedIngredients);
+            }
+
+            function getRemainingIngredients(allIngredients, baseIngredients, advancedIngredients){
+                remainingIngredients = [];
+                
+                console.log(allIngredients.length - baseIngredients.length - advancedIngredients.length, "remaining ingredients expected");
+                
+                remainingIngredients = allIngredients.filter((element) => !baseIngredients.includes(element) && !advancedIngredients.includes(element));
+                
+                console.log(remainingIngredients.length, "remaining ingredients");
+                console.log(remainingIngredients);
+            }
+
+        });
+
+    </script>
+</body>
+
+</html>

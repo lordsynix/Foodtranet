@@ -72,7 +72,7 @@ function saveIngredients() {
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
 
-fetch('autocomplete.json')
+fetch('http://localhost:3000/api/getIngredients')
     .then(response => response.json())
     .then(data => {
         const inputField = document.getElementById('ingredients');

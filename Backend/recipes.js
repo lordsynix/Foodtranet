@@ -20,13 +20,35 @@ function initializeRecipes() {
   });
 }
 
-function searchRecipes(ingredients){
+function searchRecipes(ingredients) {
   console.log(ingredients);
+  const possibleMatches = [];
+  recipes.forEach(recipe => {
+    if (recipe.hasOwnProperty('ingredients')) {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient == ingredients[0]) {
+          possibleMatches.push(recipe);
+        }
+      });
+    }
+  });
 
-  const recipe = recipes[0];
-  console.log(recipe.title);
-  return recipe;
+  let Matches = [];
+  if (possibleMatches.hasOwnProperty('ingredients')) {
+    for (let j = 0; j < possibleMatches.length; j++) {
+      for (let i = 1; i < ingredients.length; i++) {
+        if (possibleMatches[j].includes == ingredients[i]) {
+          Matches.push(possibleMatches[j]);
+        }
+      }
+    }
+  }
+  console.log(Matches);
+  console.log(possibleMatches);
+  return Matches[0];
 }
 
-module.exports = { initializeRecipes,
-                   searchRecipes };
+module.exports = {
+  initializeRecipes,
+  searchRecipes
+};
