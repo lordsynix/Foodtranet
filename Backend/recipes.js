@@ -24,8 +24,8 @@ function searchRecipes(ingredients) {
   console.log(ingredients);
   const possibleMatches = [];
   recipes.forEach(recipe => {
-    if (recipe.hasOwnProperty('ingredients')) {
-      recipe.ingredients.forEach(ingredient => {
+    if (recipe.hasOwnProperty('search_ingredients')) {
+      recipe.search_ingredients.forEach(ingredient => {
         if (ingredient == ingredients[0]) {
           possibleMatches.push(recipe);
         }
@@ -33,7 +33,7 @@ function searchRecipes(ingredients) {
     }
   });
 
-  let Matches = [];
+  /*let Matches = [];
   if (possibleMatches.hasOwnProperty('ingredients')) {
     for (let j = 0; j < possibleMatches.length; j++) {
       for (let i = 1; i < ingredients.length; i++) {
@@ -43,9 +43,12 @@ function searchRecipes(ingredients) {
       }
     }
   }
-  console.log(Matches);
-  console.log(possibleMatches);
-  return Matches[0];
+  console.log(Matches);*/
+  console.log(possibleMatches.length, "recipes found");
+  if (possibleMatches.length > 5){
+    return possibleMatches.slice(0, 5);
+  }
+  return possibleMatches;
 }
 
 module.exports = {

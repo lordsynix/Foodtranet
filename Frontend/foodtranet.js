@@ -81,7 +81,13 @@ function aktualisiereCheckboxWert(checkboxElement) {
 }
 
 function searchRecipies() {
-    window.location.href = 'searchRecipies.html'
+    const params = new URLSearchParams();
+    params.append('ingredients', JSON.stringify(ingredientsArray));
+    
+    const url = `searchRecipies.html?${params.toString()}`;
+
+    window.open(url, '_blank');
+    
 }
 
 // Die Checkbox-Elementreferenzen abrufen
@@ -109,18 +115,3 @@ aktualisiereCheckboxWert(vegetarian);
 aktualisiereCheckboxWert(noAllergies);
 
 
-const progressBar = document.querySelector('.bar');
-let progress = 0;
-
-function updateProgressBar() {
-    if (progress < 100) {
-        progress++;
-        progressBar.style.width = `${progress}%`;
-        progressBar.setAttribute('data-progress', progress); // Setzen Sie das Attribut data-progress
-    } else {
-        clearInterval(interval);
-        progressBar.style.display = 'none'
-    }
-}
-
-const interval = setInterval(updateProgressBar, 1000);
