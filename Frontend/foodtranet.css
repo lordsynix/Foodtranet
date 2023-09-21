@@ -64,7 +64,7 @@ li.ingredientList {
     margin: 5px 0;
 }
 
-.delete-button {
+.deleteButton {
     border: none;
     cursor: pointer;
     padding: 5px 10px; /* Fixed padding for button spacing */
@@ -74,14 +74,47 @@ li.ingredientList {
     margin-left: 1cm; /* Fixed margin to maintain 2cm distance from ingredient */
 }
 
-button#searchRecipies {
+button#searchRecipes {
     color: #ffffff;
     background-color: #333;
 }
 
-button#searchRecipies:hover {
+button#searchRecipes:hover {
     color: #000000;
     background-color: #f0f0f0;    
+}
+
+.autocomplete {
+    position: relative;
+    display: inline-block;
+}
+
+#autocomplete-input {
+    width: 300px;
+    padding: 10px;
+}
+
+#autocomplete-list {
+    position: absolute;
+    z-index: 1;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border: 1px solid #ccc;
+    border-top: none;
+    width: 298px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: white;
+}
+
+#autocomplete-list li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+#autocomplete-list li:hover {
+    background-color: #f0f0f0;
 }
 
 /* Stil für die Ladeleiste */

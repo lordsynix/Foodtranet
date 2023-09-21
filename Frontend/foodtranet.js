@@ -1,4 +1,5 @@
 const ingredientsArray = []; // Initialize an array to store ingredients
+const searchIngredients = [];
 
 
 function addIngredient(event) {
@@ -21,7 +22,7 @@ function addIngredient(event) {
             deleteButton.onclick = function() {
                 deleteIngredient(ingredient, listItem);
             };
-            deleteButton.classList.add('delete-button'); // Apply the class
+            deleteButton.classList.add('deleteButton'); // Apply the class
 
             // Append the span and button to the list item
             listItem.appendChild(ingredientSpan);
@@ -32,6 +33,9 @@ function addIngredient(event) {
 
             // Add the ingredient to the array
             ingredientsArray.push(ingredient);
+            searchIngredients.push(ingredient);
+
+            console.log(searchIngredients);
 
             // Automatically save the updated array
             saveIngredients();
@@ -65,7 +69,7 @@ function clearIngredients() {
 
 function saveIngredients() {
     // You can use the ingredientsArray for further processing or storage
-    console.log(ingredientsArray);
+    
 
     // For example, you can convert it to JSON and send it to a server
     const ingredientsJSON = JSON.stringify(ingredientsArray);
@@ -80,8 +84,8 @@ function aktualisiereCheckboxWert(checkboxElement) {
     // Hier kannst du den Wert weiterverarbeiten oder speichern
 }
 
-function searchRecipies() {
-    window.location.href = 'searchRecipies.html'
+function searchRecipes() {
+    window.location.href = 'searchRecipes.html'
 }
 
 // Die Checkbox-Elementreferenzen abrufen
@@ -107,6 +111,101 @@ noAllergies.addEventListener('change', function() {
 aktualisiereCheckboxWert(vegan);
 aktualisiereCheckboxWert(vegetarian);
 aktualisiereCheckboxWert(noAllergies);
+
+fetch('autocomplete.json')
+    .then(response => response.json())
+    .then(data => {
+        const inputField = document.getElementById('ingredients');
+        const list = document.getElementById('autocomplete-list');
+        
+        inputField.addEventListener('input', function() {
+            const inputValue = this.value.toLowerCase();
+            list.innerHTML = '';
+
+            if (inputValue.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
+
+            const filteredData = data.filter(item => item.toLowerCase().includes(inputValue));
+
+            
+            
+            if (filteredData.length === 0) {
+                list.style.display = 'none';
+                return;
+            }
+
+            filteredData.forEach(item => {
+                const listItem = document.createElement('li');
+                const AutolistItem = document.createElement('li');
+                listItem.textContent = item;
+                
+                listItem.addEventListener('click', function() {
+                    
+                    searchIngredients.push(filteredData[0]);
+                    console.log(searchIngredients);
+                    
+                    const inputElement = document.getElementById('ingredients');
+                    const ingredient = inputElement.value.trim();
+                    if (ingredient !== '') {
+                        
+                        const ingredientList = document.getElementById('ingredientList');
+                        const listItem = document.createElement('li');
+
+                        // Create a span for the ingredient text
+                        const ingredientSpan = document.createElement('span');
+                        ingredientSpan.textContent = ingredient;
+
+                        // Create a button to delete the ingredient
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.onclick = function () {
+                            listItem.removeChild(AutolistItem);
+                            listItem.removeChild(deleteButton)
+                        };
+                        deleteButton.classList.add('deleteButton'); // Apply the class
+
+                        
+                        
+
+                        // Append the span and button to the list item
+                        inputElement.value = ''; // Clear the input field
+                        
+
+                        ingredientList.appendChild(listItem);
+                        AutolistItem.textContent = item;
+                        listItem.appendChild(AutolistItem);
+                        AutolistItem.appendChild(deleteButton);
+
+                        
+                        
+                                        
+                        
+
+
+                        // Automatically save the updated array
+                        saveIngredients();
+                    }
+                    
+                });
+                list.appendChild(listItem);
+            });
+
+            list.style.display = 'block';
+        });
+
+        // Hide the autocomplete list when clicking outside
+        document.addEventListener('click', function(event) {
+            if (event.target !== inputField && event.target !== list) {
+                list.style.display = 'none';
+            }
+        });
+    })
+    .catch(error => {
+        console.error('Error loading JSON data:', error);
+    });
+
 
 
 const progressBar = document.querySelector('.bar');
