@@ -137,9 +137,11 @@ fetch('https://foodtranet-test.onrender.com/api/getIngredients')
                     addIngredientToArray(item);
                     const inputElement = document.getElementById('ingredientInput');
                     inputElement.value = '';
+                    console.log(item);
                 });
                 list.appendChild(listItem);
             });
+            
 
             list.style.display = 'block';
         });
