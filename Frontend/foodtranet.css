@@ -145,6 +145,21 @@ button#searchRecipes:hover {
     right: 10px; /* Platzieren Sie den Text rechts */
 }
 
+table {
+    width: 100%;
+    border-collapse: collapse; /* Zusammenführen der Tabellenzellenränder */
+  }
+  
+  td {
+    padding: 8px; /* Einstellen des Zellenabstands (kann je nach Bedarf angepasst werden) */
+    text-align: left; /* Text links ausrichten */
+    vertical-align: middle; /* Vertikale Ausrichtung zentrieren */
+  }
+  
+  td:first-child {
+    white-space: nowrap; /* Verhindert Zeilenumbrüche im Text in der ersten Spalte */
+  }
+    
 @media (max-width: 740px) {
     .input, .myIngredients {
         width: 100%;

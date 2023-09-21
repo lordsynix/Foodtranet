@@ -27,7 +27,7 @@ function aktualisiereCheckboxWert(checkboxElement) {
 
 function searchRecipes() {
     const params = new URLSearchParams();
-    params.append('ingredients', JSON.stringify(ingredientsArray));
+    params.append('ingredients', JSON.stringify(searchIngredients));
     
     const url = `searchRecipes.html?${params.toString()}`;
 
@@ -86,9 +86,7 @@ function addIngredientToArray(ingredient) {
 }
 
 function deleteIngredient(ingredient) {
-    var rowId = document.getElementById(ingredient);
-    var i = rowId.parentNode.parentNode.parentNode.rowIndex;
-    document.getElementById('ingredientTable').deleteRow(i)
+    document.getElementById(ingredient).remove();
     searchIngredients.splice(searchIngredients.indexOf(ingredient), 1)
     updateArray();
 }
