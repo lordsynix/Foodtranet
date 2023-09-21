@@ -94,8 +94,8 @@
             let matches = [];
 
             ingredientsArray.forEach((searchIngredient) => {
-                const regex = new RegExp(`\\b${searchIngredient.toLowerCase()}\\b`, 'i');
-                if (regex.test(ingredient.toLowerCase())) {
+                const regex = new RegExp(`\\b${searchIngredient}\\b`, 'i');
+                if (regex.test(ingredient)) {
                     const value = searchIngredient.split(/\s+/).length;
                     const match = { ingredient: searchIngredient, value };
                     matches.push(match);
