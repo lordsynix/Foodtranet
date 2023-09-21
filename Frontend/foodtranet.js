@@ -84,11 +84,11 @@ function aktualisiereCheckboxWert(checkboxElement) {
     // Hier kannst du den Wert weiterverarbeiten oder speichern
 }
 
-function searchRecipies() {
+function searchRecipes() {
     const params = new URLSearchParams();
     params.append('ingredients', JSON.stringify(ingredientsArray));
     
-    const url = `searchRecipies.html?${params.toString()}`;
+    const url = `searchRecipes.html?${params.toString()}`;
 
     window.open(url, '_blank');
     
@@ -118,7 +118,7 @@ aktualisiereCheckboxWert(vegan);
 aktualisiereCheckboxWert(vegetarian);
 aktualisiereCheckboxWert(noAllergies);
 
-fetch('autocomplete.json')
+fetch('http://localhost:3000/api/getIngredients')
     .then(response => response.json())
     .then(data => {
         const inputField = document.getElementById('ingredients');
