@@ -15,22 +15,7 @@
     <link rel="stylesheet" href="../autocomplete.js-2.7/dist/autocomplete.min.css">
     <script src="../autocomplete.js-2.7/dist/autocomplete.min.js"></script>
     <link rel="stylesheet" href="autocomplete.css">
-    <script>
-        const inputElement = document.getElementById('ingredients');
     
-        autocomplete({
-            input: inputElement,
-            minLength: 1, // Mindestanzahl von Zeichen, um Vorschläge anzuzeigen
-            fetch: function(text, update) {
-                text = text.toLowerCase();
-                // Fügen Sie hier Ihren Code zum Abrufen von Vorschlägen basierend auf dem eingegebenen Text hinzu
-            },
-            onSelect: function(item) {
-                // Wird aufgerufen, wenn der Benutzer einen Vorschlag auswählt
-                inputElement.value = item;
-            }
-        });
-    </script>
 </head>
 
 <body>

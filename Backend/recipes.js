@@ -20,13 +20,67 @@ function initializeRecipes() {
   });
 }
 
-function searchRecipes(ingredients){
-  console.log(ingredients);
+/*function searchRecipes(ingredients) {
 
-  const recipe = recipes[0];
-  console.log(recipe.title);
-  return recipe;
+  // Filtern Sie die Rezepte, die das erste gegebene Ingredient enthalten
+  const possibleMatches = recipes.forEach(recipe => {
+    recipe.ingredients.includes(ingredients[0]);
+  });
+
+  const matchingRecipes = possibleMatches.forEach(possibleMatch => {
+    recipe.ingredients.includes(ingredients);
+  })
+
+  console.log(matchingRecipes);
+}*/
+
+function searchRecipes(ingredients) {
+
+  // Filtern Sie die Rezepte, die das erste gegebene Ingredient enthalten
+
+  console.log(ingredients);
+  const possibleMatches = [];
+  recipes.forEach(recipe => {
+    if (recipe.hasOwnProperty('ingredients')) {
+      recipe.ingredients.forEach(ingredient => {
+        if (ingredient == ingredients[0]) {
+          possibleMatches.push(recipe);
+        }
+      });
+    }
+  });
+  /*const Matches = [];
+  if (possibleMatches.hasOwnProperty('ingredients')) {
+    for (let i = 1; i < ingredients.length; i++) {
+      for (let j = 0; j < possibleMatches.length; j++) {
+      if (possibleMatches[j].includes == ingredients[i]) {
+        Matches.push(possibleMatches[j]);
+      }
+      }
+
+
+    }
+  }
+  */
+  const Matches = [];
+  if (possibleMatches.hasOwnProperty('ingredients')) {
+    for (let j = 0; j < possibleMatches.length; j++) {
+      for (let i = 1; i < ingredients.length; i++) {
+        if (possibleMatches[j].includes == ingredients[i]) {
+          Matches.push(possibleMatches[j]);
+        }
+      }
+    }
+  }
 }
 
-module.exports = { initializeRecipes,
-                   searchRecipes };
+
+          console.log(Matches);
+          console.log(possibleMatches);
+          return Matches[0];
+        
+
+        module.exports = {
+          initializeRecipes,
+          searchRecipes
+        };

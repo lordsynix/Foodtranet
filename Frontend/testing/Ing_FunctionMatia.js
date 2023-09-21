@@ -4,6 +4,7 @@
 const ingredientsArray = [];
 
 function addIngredient(event) {
+    
     if (event.key === 'Enter') {
         event.preventDefault(); // Prevent form submission
         const inputElement = document.getElementById('ingredients');
@@ -71,7 +72,7 @@ function saveIngredients() {
     // Then you can send 'ingredientsJSON' to your server or save it to localStorage, etc.
 }
 
-fetch('autocomplete.json')
+fetch('http://localhost:3000/api/getIngredients')
     .then(response => response.json())
     .then(data => {
         const inputField = document.getElementById('ingredients');
@@ -95,10 +96,50 @@ fetch('autocomplete.json')
 
             filteredData.forEach(item => {
                 const listItem = document.createElement('li');
+                const AutolistItem = document.createElement('li');
                 listItem.textContent = item;
                 listItem.addEventListener('click', function() {
-                    inputField.value = item;
-                    list.style.display = 'none';
+                    
+                    const inputElement = document.getElementById('ingredients');
+                    const ingredient = inputElement.value.trim();
+                    if (ingredient !== '') {
+                        
+                        const ingredientList = document.getElementById('ingredientList');
+                        const listItem = document.createElement('li');
+
+                        // Create a span for the ingredient text
+                        const ingredientSpan = document.createElement('span');
+                        ingredientSpan.textContent = ingredient;
+
+                        // Create a button to delete the ingredient
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.onclick = function () {
+                            listItem.removeChild(AutolistItem);
+                            listItem.removeChild(deleteButton)
+                        };
+                        deleteButton.classList.add('delete-button'); // Apply the class
+
+                        
+                        
+
+                        // Append the span and button to the list item
+                        inputElement.value = ''; // Clear the input field
+                        
+
+                        ingredientList.appendChild(listItem);
+                        AutolistItem.textContent = item;
+                        listItem.appendChild(AutolistItem);
+                        listItem.appendChild(deleteButton);
+
+                        ingredientsArray.push(AutolistItem); // Add the ingredient to the array
+                        
+
+
+                        // Automatically save the updated array
+                        saveIngredients();
+                    }
+                    
                 });
                 list.appendChild(listItem);
             });
