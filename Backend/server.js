@@ -38,7 +38,7 @@ app.get('/api/getIngredients', (req, res) => {
 });
 
 app.get('/api/getRecipes', (req, res) => {
-  const filePath = 'testData.json';
+  const filePath = 'recipes_raw.json';
 
   fs.readFile(filePath, 'utf8', (err, data) => {
     if (err) {

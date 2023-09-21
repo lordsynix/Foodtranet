@@ -69,7 +69,7 @@ function clearIngredients() {
 
 function saveIngredients() {
     // You can use the ingredientsArray for further processing or storage
-    
+    console.log(searchIngredients);
 
     // For example, you can convert it to JSON and send it to a server
     const ingredientsJSON = JSON.stringify(ingredientsArray);
@@ -86,7 +86,7 @@ function aktualisiereCheckboxWert(checkboxElement) {
 
 function searchRecipes() {
     const params = new URLSearchParams();
-    params.append('ingredients', JSON.stringify(ingredientsArray));
+    params.append('ingredients', JSON.stringify(searchIngredients));
     
     const url = `searchRecipes.html?${params.toString()}`;
 
@@ -112,7 +112,6 @@ noAllergies.addEventListener('change', function() {
     aktualisiereCheckboxWert(noAllergies); 
 });
 
-
 // Die Funktion einmalig aufrufen, um die initialen Werte anzuzeigen
 aktualisiereCheckboxWert(vegan);
 aktualisiereCheckboxWert(vegetarian);
@@ -135,8 +134,6 @@ fetch('http://localhost:3000/api/getIngredients')
 
             const filteredData = data.filter(item => item.toLowerCase().includes(inputValue));
 
-            
-            
             if (filteredData.length === 0) {
                 list.style.display = 'none';
                 return;
@@ -150,7 +147,6 @@ fetch('http://localhost:3000/api/getIngredients')
                 listItem.addEventListener('click', function() {
                     
                     searchIngredients.push(filteredData[0]);
-                    console.log(searchIngredients);
                     
                     const inputElement = document.getElementById('ingredients');
                     const ingredient = inputElement.value.trim();
@@ -173,23 +169,13 @@ fetch('http://localhost:3000/api/getIngredients')
                         };
                         deleteButton.classList.add('deleteButton'); // Apply the class
 
-                        
-                        
-
                         // Append the span and button to the list item
                         inputElement.value = ''; // Clear the input field
-                        
 
                         ingredientList.appendChild(listItem);
                         AutolistItem.textContent = item;
                         listItem.appendChild(AutolistItem);
                         AutolistItem.appendChild(deleteButton);
-
-                        
-                        
-                                        
-                        
-
 
                         // Automatically save the updated array
                         saveIngredients();
