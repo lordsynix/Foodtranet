@@ -16,7 +16,7 @@ initializeRecipes();
 app.post('/api/searchRecipes', (req, res) => {
   const { ingredients } = req.body;
 
-  console.log('Api called');
+  console.log('Api searchRecipes called');
   const response = searchRecipes(ingredients);
 
   res.json({ response });
@@ -32,7 +32,7 @@ app.get('/api/getIngredients', (req, res) => {
       res.status(500).send('Interner Serverfehler');
       return;
     }
-    console.log('ingredients data sent');
+    console.log('API getIngredients called');
     res.send(data);
   });
 });
@@ -46,7 +46,7 @@ app.get('/api/getRecipes', (req, res) => {
       res.status(500).send('Interner Serverfehler');
       return;
     }
-    console.log('raw recipes data sent');
+    console.log('API getRecipes called');
     res.send(data);
   });
 });

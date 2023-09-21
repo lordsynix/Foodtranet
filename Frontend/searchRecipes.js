@@ -11,7 +11,7 @@ data.forEach(ingredient => {
 console.log(ingredients);
 
 
-fetch('http://localhost:3000/api/searchRecipes', {
+fetch('https://foodtranet-test.onrender.com/api/searchRecipes', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
