@@ -40,8 +40,6 @@ function searchRecipes(ingredients) {
   console.log(ingredients);
 
   const matchingRecipes = findMatchingRecipes(ingredients);
-  
-  console.log(matchingRecipes.length, "recipes found");
 
   return matchingRecipes;
 }
@@ -71,6 +69,9 @@ function findMatchingRecipes(ingredients) {
   // Sortieren Sie die Rezepte nach der Anzahl der Übereinstimmungen in absteigender Reihenfolge
   matchingRecipes.sort((a, b) => b.matchCount - a.matchCount);
 
+  for (i = 0; i < 5; i++) {
+    console.log(matchingRecipes[i].matchCount, "/", ingredients.length ,"ingredients matching");
+  }
   // Wählen Sie die besten 5 Rezepte aus
   const top5Recipes = matchingRecipes.slice(0, 5).map(item => item.recipe);
 
