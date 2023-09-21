@@ -61,7 +61,7 @@ function deleteIngredient(ingredient, listItem) {
 function clearIngredients() {
     const ingredientList = document.getElementById('ingredientList');
     ingredientList.innerHTML = ''; // Clear the list
-    ingredientsArray.length = 0; // Clear the array
+    searchIngredients.length = 0; // Clear the array
 
     // Automatically save the cleared array
     saveIngredients();
