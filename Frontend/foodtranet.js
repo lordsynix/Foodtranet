@@ -158,6 +158,7 @@ fetch('http://localhost:3000/api/getIngredients')
                         
                         const ingredientList = document.getElementById('ingredientList');
                         const listItem = document.createElement('li');
+                        listItem.classList.add('ingredientList')
 
                         // Create a span for the ingredient text
                         const ingredientSpan = document.createElement('span');
