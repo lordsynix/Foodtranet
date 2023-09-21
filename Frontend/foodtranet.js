@@ -125,8 +125,6 @@ fetch('http://localhost:3000/api/getIngredients')
 
             const filteredData = data.filter(item => item.toLowerCase().includes(inputValue));
 
-            
-            
             if (filteredData.length === 0) {
                 list.style.display = 'none';
                 return;

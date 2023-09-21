@@ -1,6 +1,7 @@
 const fs = require('fs');
 
 const recipes = [];
+const indexedRecipes = {};
 
 function initializeRecipes() {
   fs.readFile('recipes.json', 'utf8', (err, data) => {
@@ -13,6 +14,21 @@ function initializeRecipes() {
       const recipesData = JSON.parse(data);
       recipes.push(...recipesData);
       console.log('Successfully loaded', recipes.length, 'recipes');
+
+      recipes.forEach(recipe => {
+        if (recipe.hasOwnProperty('search_ingredients')) {
+          recipe.search_ingredients.forEach(ingredient => {
+            if (!indexedRecipes[ingredient]) {
+              indexedRecipes[ingredient] = [];
+            }
+            if (!indexedRecipes[ingredient].includes(recipe)) {
+              indexedRecipes[ingredient].push(recipe);
+            }
+          });
+        }
+      });
+
+      console.log("Indexed recipes");
       console.log('--------------------------------');
     } catch (parseError) {
       console.error('Fehler beim Parsen der JSON-Datei:', parseError);
@@ -22,33 +38,44 @@ function initializeRecipes() {
 
 function searchRecipes(ingredients) {
   console.log(ingredients);
-  const possibleMatches = [];
-  recipes.forEach(recipe => {
-    if (recipe.hasOwnProperty('search_ingredients')) {
-      recipe.search_ingredients.forEach(ingredient => {
-        if (ingredient == ingredients[0]) {
-          possibleMatches.push(recipe);
-        }
-      });
-    }
-  });
 
-  /*let Matches = [];
-  if (possibleMatches.hasOwnProperty('ingredients')) {
-    for (let j = 0; j < possibleMatches.length; j++) {
-      for (let i = 1; i < ingredients.length; i++) {
-        if (possibleMatches[j].includes == ingredients[i]) {
-          Matches.push(possibleMatches[j]);
-        }
+  const matchingRecipes = findMatchingRecipes(ingredients);
+
+  return matchingRecipes;
+}
+
+function findMatchingRecipes(ingredients) {
+  const matchingRecipes = [];
+
+  // Durchlaufen Sie alle Rezepte
+  for (const recipe of recipes) {
+    const recipeIngredients = recipe.search_ingredients || [];
+
+    // Zählen Sie die Übereinstimmungen der Zutaten in diesem Rezept
+    let matchCount = 0;
+    for (const ingredient of ingredients) {
+      if (recipeIngredients.includes(ingredient)) {
+        matchCount++;
       }
     }
+
+    // Fügen Sie das Rezept zur Liste der Übereinstimmungen hinzu
+    matchingRecipes.push({
+      recipe: recipe,
+      matchCount: matchCount,
+    });
   }
-  console.log(Matches);*/
-  console.log(possibleMatches.length, "recipes found");
-  if (possibleMatches.length > 5){
-    return possibleMatches.slice(0, 5);
+
+  // Sortieren Sie die Rezepte nach der Anzahl der Übereinstimmungen in absteigender Reihenfolge
+  matchingRecipes.sort((a, b) => b.matchCount - a.matchCount);
+
+  for (i = 0; i < 5; i++) {
+    console.log(matchingRecipes[i].matchCount, "/", ingredients.length ,"ingredients matching");
   }
-  return possibleMatches;
+  // Wählen Sie die besten 5 Rezepte aus
+  const top5Recipes = matchingRecipes.slice(0, 5).map(item => item.recipe);
+
+  return top5Recipes;
 }
 
 module.exports = {
